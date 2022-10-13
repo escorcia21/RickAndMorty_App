@@ -1,6 +1,6 @@
 import 'package:rickandmorty/models/character_location.dart';
 
-/// Character's model.
+/// **Character's model**
 ///
 /// [id] The id of the character.
 ///
@@ -57,7 +57,7 @@ class Character {
       name: json["name"],
       status: json["status"],
       species: json["species"],
-      type: json["type"] != "" ? json["type"] : "",
+      type: json["type"] != "" ? json["type"] : "Unspecified",
       gender: json["gender"],
       origin: CharacterLocation.fromJson(json["origin"]),
       location: CharacterLocation.fromJson(json["location"]),

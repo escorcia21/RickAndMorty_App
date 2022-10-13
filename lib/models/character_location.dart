@@ -1,4 +1,4 @@
-/// Character's last known location or Character's origin location.
+/// **Character's last known location or Character's origin location**
 ///
 /// [name] The name of the location.
 ///

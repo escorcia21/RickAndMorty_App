@@ -1,3 +1,5 @@
+/// **Episode's model**
+///
 /// [id] The id of the episode.
 ///
 /// [name] The name of the episode.
