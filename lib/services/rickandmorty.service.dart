@@ -9,7 +9,7 @@ import 'dart:convert';
 /// https://rickandmortyapi.com/
 class RickAndMortyService {
   /// Base URL for the Rick and Morty API
-  static const String _baseUrl = 'https://rickandmortyapi.com/api/';
+  static const String _baseUrl = 'rickandmortyapi.com';
 
   /// Get characters
   ///
@@ -25,12 +25,15 @@ class RickAndMortyService {
     final response =
         await fetcher('/character', name: name, page: page.toString());
 
-    List<Character> characters =
-        response['results'].map((e) => Character.fromJson(e)).toList();
+    var results = response['results'];
+    List<Character> characters = results.map<Character>((character) {
+      return Character.fromJson(character);
+    }).toList();
+
     return characters;
   }
 
-  /// Get episodes
+  /// **Get episodes**
   ///
   /// [name] is optional, it will filter the episodes by name
   ///
@@ -45,12 +48,14 @@ class RickAndMortyService {
     final response =
         await fetcher('/episode', name: name, page: page.toString());
 
+    var results = response['results'];
     List<Episode> episodes =
-        response['results'].map((e) => Episode.fromJson(e)).toList();
+        results.map((episode) => Episode.fromJson(episode)).toList();
+
     return episodes;
   }
 
-  /// Get locations
+  /// **Get locations**
   ///
   /// [name] is optional and will filter the results by the name
   ///
@@ -65,12 +70,14 @@ class RickAndMortyService {
     final response =
         await fetcher('/location', name: name, page: page.toString());
 
+    var results = response['results'];
     List<Location> locations =
-        response['results'].map((e) => Location.fromJson(e)).toList();
+        results.map((location) => Location.fromJson(location)).toList();
+
     return locations;
   }
 
-  /// Rick and Morty API fetcher function
+  /// **Rick and Morty API fetcher**
   ///
   /// Fetch data from an specific endpoint
   ///
@@ -93,7 +100,8 @@ class RickAndMortyService {
   /// ```
   static Future fetcher(String endpoint,
       {String name = '', String page = '1'}) async {
-    final url = Uri.https(_baseUrl, endpoint, {'page': page, 'name': name});
+    final url =
+        Uri.https(_baseUrl, '/api/$endpoint', {'page': page, 'name': name});
     final res = await http.get(url);
 
     if (res.statusCode == 200) {
@@ -101,7 +109,7 @@ class RickAndMortyService {
       final results = jsonDecode(body);
       return results;
     } else {
-      throw Exception("Something happen with status: ${res.statusCode}");
+      throw Exception("Failed to load data");
     }
   }
 }
