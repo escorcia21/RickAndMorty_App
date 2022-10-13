@@ -98,20 +98,26 @@ class CustomSearchDelegate extends SearchDelegate {
   */
   @override
   Widget buildResults(BuildContext context) {
-    // returns a Not Found image if the results are empty
-    if (_characters.isEmpty) {
-      return Center(
-        child: Image.asset(
-          'assets/NotFound.png',
-        ),
-      );
-    }
-
-    // returns a list of characters if the results are not empty
-    return ListView.builder(
-      itemCount: _characters.length,
-      itemBuilder: (BuildContext context, int index) {
-        return CharacterCard(character: _characters[index]);
+    return FutureBuilder(
+      future: Future.value(_characters),
+      builder: (BuildContext context, AsyncSnapshot snapshot) {
+        if (!snapshot.hasData || snapshot.data.isEmpty) {
+          return Center(
+            child: Image.asset(
+              'assets/NotFound.png',
+            ),
+          );
+        }
+        return Padding(
+          padding: const EdgeInsets.all(4.0),
+          child: ListView.builder(
+            itemCount: snapshot.data.length,
+            itemBuilder: (BuildContext context, int index) {
+              Character character = snapshot.data[index];
+              return CharacterCard(character: character);
+            },
+          ),
+        );
       },
     );
   }
