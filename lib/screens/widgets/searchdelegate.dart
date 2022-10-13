@@ -98,10 +98,10 @@ class CustomSearchDelegate extends SearchDelegate {
   */
   @override
   Widget buildResults(BuildContext context) {
-    return FutureBuilder(
-      future: Future.value(_characters),
-      builder: (BuildContext context, AsyncSnapshot snapshot) {
-        if (!snapshot.hasData || snapshot.data.isEmpty) {
+    return StreamBuilder(
+      stream: Stream.value(_characters),
+      builder: ((context, snapshot) {
+        if (!snapshot.hasData || snapshot.data!.isEmpty) {
           return Center(
             child: Image.asset(
               'assets/NotFound.png',
@@ -111,14 +111,14 @@ class CustomSearchDelegate extends SearchDelegate {
         return Padding(
           padding: const EdgeInsets.all(4.0),
           child: ListView.builder(
-            itemCount: snapshot.data.length,
+            itemCount: snapshot.data!.length,
             itemBuilder: (BuildContext context, int index) {
-              Character character = snapshot.data[index];
+              Character character = snapshot.data![index];
               return CharacterCard(character: character);
             },
           ),
         );
-      },
+      }),
     );
   }
 }
