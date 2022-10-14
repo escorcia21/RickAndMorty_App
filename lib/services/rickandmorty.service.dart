@@ -44,13 +44,13 @@ class RickAndMortyService {
   ///
   /// https://rickandmortyapi.com/documentation/#filter-episodes
   static Future<List<Episode>> getEpisodes(
-      {String name = '', int page = 1}) async {
-    final response =
-        await fetcher('/episode', name: name, page: page.toString());
+      {String name = '', int page = 1, String episode = 'S01'}) async {
+    final response = await fetcher('/episode',
+        name: name, page: page.toString(), episode: episode);
 
     var results = response['results'];
     List<Episode> episodes =
-        results.map((episode) => Episode.fromJson(episode)).toList();
+        results.map<Episode>((episode) => Episode.fromJson(episode)).toList();
 
     return episodes;
   }
@@ -71,8 +71,9 @@ class RickAndMortyService {
         await fetcher('/location', name: name, page: page.toString());
 
     var results = response['results'];
-    List<Location> locations =
-        results.map((location) => Location.fromJson(location)).toList();
+    List<Location> locations = results
+        .map<Location>((location) => Location.fromJson(location))
+        .toList();
 
     return locations;
   }
@@ -99,11 +100,10 @@ class RickAndMortyService {
   /// final response = await fetcher('/location');
   /// ```
   static Future fetcher(String endpoint,
-      {String name = '', String page = '1'}) async {
-    final url =
-        Uri.https(_baseUrl, '/api/$endpoint', {'page': page, 'name': name});
+      {String name = '', String page = '1', String episode = ''}) async {
+    final url = Uri.https(_baseUrl, '/api/$endpoint',
+        {'page': page, 'name': name, 'episode': episode});
     final res = await http.get(url);
-
     if (res.statusCode == 200) {
       String body = utf8.decode(res.bodyBytes);
       final results = jsonDecode(body);
