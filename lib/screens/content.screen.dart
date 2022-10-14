@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:rickandmorty/screens/episodes/episodes.screen.dart';
-import 'package:rickandmorty/screens/loacations/locations.screen.dart';
+import 'package:rickandmorty/screens/locations/locations.screen.dart';
 import 'package:rickandmorty/screens/widgets/searchdelegate.dart';
 
 import 'characters/characters.screen.dart';
