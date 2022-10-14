@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:rickandmorty/models/location.dart';
-import 'package:rickandmorty/screens/loacations/widgets/location.card.dart';
+import 'package:rickandmorty/screens/locations/widgets/location.card.dart';
 import 'package:rickandmorty/services/rickandmorty.service.dart';
 
 class LocationsScreen extends StatefulWidget {

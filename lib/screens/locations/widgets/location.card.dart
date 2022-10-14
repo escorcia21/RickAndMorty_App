@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:rickandmorty/models/location.dart';
-import 'package:rickandmorty/screens/loacations/location.detail.screen.dart';
+import 'package:rickandmorty/screens/locations/location.detail.screen.dart';
 
 /// **LocationCard** is a widget that displays a location card
 ///

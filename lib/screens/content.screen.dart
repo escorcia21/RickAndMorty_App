@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:rickandmorty/screens/episodes/episodes.screen.dart';
+import 'package:rickandmorty/screens/loacations/locations.screen.dart';
 import 'package:rickandmorty/screens/widgets/searchdelegate.dart';
 
 import 'characters/characters.screen.dart';
@@ -20,8 +22,8 @@ class _ContentScreenState extends State<ContentScreen> {
   // The list of pages.
   List<Widget> pages = [
     const CharactersSreen(),
-    const Center(child: Text('Episodes')),
-    const Center(child: Text('Locations')),
+    const EpisodesScreen(),
+    const LocationsScreen(),
   ];
 
   @override
@@ -76,7 +78,12 @@ class _ContentScreenState extends State<ContentScreen> {
 
         // Navigates to the selected page
         onTap: (index) {
-          controller.jumpToPage(index);
+          // Slide animation when changing pages
+          controller.animateToPage(
+            index,
+            duration: const Duration(milliseconds: 600),
+            curve: Curves.ease,
+          );
           setState(() {
             currentIndex = index;
           });
