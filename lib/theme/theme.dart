@@ -29,6 +29,7 @@ class MyTheme {
             .headline6,
       ),
       bottomNavigationBarTheme: BottomNavigationBarThemeData(
+        backgroundColor: AppColors.darkScheme.background,
         unselectedItemColor: Colors.grey.shade400,
         selectedItemColor: AppColors.darkScheme.primary,
       ),
