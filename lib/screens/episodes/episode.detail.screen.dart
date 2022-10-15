@@ -52,9 +52,12 @@ class _EpisodeDetailScreenState extends State<EpisodeDetailScreen> {
             widget.episode.airDate,
             style: Theme.of(context).textTheme.headline1,
           ),
-          Text(
-            widget.episode.overview,
-            style: Theme.of(context).textTheme.bodyText2,
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Text(
+              widget.episode.overview,
+              style: Theme.of(context).textTheme.bodyText2,
+            ),
           ),
           const SizedBox(
             height: 20,
@@ -69,13 +72,6 @@ class _EpisodeDetailScreenState extends State<EpisodeDetailScreen> {
             child: FutureBuilder(
               future: _characters,
               builder: (context, snapshot) {
-                // If the list of characters is empty, show a message
-                if (snapshot.data!.isEmpty) {
-                  return const Center(
-                    child: Text('No characters found'),
-                  );
-                }
-
                 // If the data is not fetched yet, show a loading indicator
                 if (!snapshot.hasData) {
                   return const Center(
@@ -83,13 +79,23 @@ class _EpisodeDetailScreenState extends State<EpisodeDetailScreen> {
                   );
                 }
 
+                // If the list of characters is empty, show a message
+                if (snapshot.data!.isEmpty) {
+                  return const Center(
+                    child: Text('No characters found'),
+                  );
+                }
+
                 // If the list of characters is loaded, show the list of characters
-                return ListView.builder(
-                  itemCount: widget.episode.characters.length,
-                  itemBuilder: (context, index) {
-                    Character character = snapshot.data![index];
-                    return CharacterCard(character: character);
-                  },
+                return Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: ListView.builder(
+                    itemCount: widget.episode.characters.length,
+                    itemBuilder: (context, index) {
+                      Character character = snapshot.data![index];
+                      return CharacterCard(character: character);
+                    },
+                  ),
                 );
               },
             ),
