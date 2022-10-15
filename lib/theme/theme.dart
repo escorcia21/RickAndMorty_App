@@ -7,11 +7,11 @@ class MyTheme {
     return ThemeData(
       primarySwatch: AppColors.createMaterialColor(AppColors.primaryColor),
       colorScheme: AppColors.darkScheme,
-      toggleableActiveColor: AppColors.darkScheme.secondary,
+      // toggleableActiveColor: AppColors.darkScheme.secondary,
       // this can all be copied, waiting for verification
       fontFamily: AppTextStyle.fontFamily,
       textTheme: AppTextStyle.textTheme.copyWith(
-        bodyText1: AppTextStyle.bodytext1.copyWith(
+        bodyLarge: AppTextStyle.bodytext1.copyWith(
           color: Colors.white70,
         ),
       ),
@@ -22,11 +22,11 @@ class MyTheme {
         ),
         titleTextStyle: AppTextStyle.textTheme
             .copyWith(
-              headline6: AppTextStyle.headline1.copyWith(
+              titleLarge: AppTextStyle.headline1.copyWith(
                 color: AppColors.darkScheme.primary,
               ),
             )
-            .headline6,
+            .titleLarge,
       ),
       bottomNavigationBarTheme: BottomNavigationBarThemeData(
         backgroundColor: AppColors.darkScheme.background,

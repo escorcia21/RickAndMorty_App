@@ -29,13 +29,30 @@ class LocationCard extends StatelessWidget {
           child: Column(
             children: [
               // Show the location name, type and dimension
-              Text('Name', style: Theme.of(context).textTheme.headline3),
-              Text(location.name, style: Theme.of(context).textTheme.subtitle1),
-              Text('Type', style: Theme.of(context).textTheme.headline3),
-              Text(location.type, style: Theme.of(context).textTheme.subtitle1),
-              Text('Dimension', style: Theme.of(context).textTheme.headline3),
-              Text(location.dimension,
-                  style: Theme.of(context).textTheme.subtitle1),
+              Text(
+                'Name',
+                style: Theme.of(context).textTheme.displaySmall,
+              ),
+              Text(
+                location.name,
+                style: Theme.of(context).textTheme.titleMedium,
+              ),
+              Text(
+                'Type',
+                style: Theme.of(context).textTheme.displaySmall,
+              ),
+              Text(
+                location.type,
+                style: Theme.of(context).textTheme.titleMedium,
+              ),
+              Text(
+                'Dimension',
+                style: Theme.of(context).textTheme.displaySmall,
+              ),
+              Text(
+                location.dimension,
+                style: Theme.of(context).textTheme.titleMedium,
+              ),
             ],
           ),
         ),

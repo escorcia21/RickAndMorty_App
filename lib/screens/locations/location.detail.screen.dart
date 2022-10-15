@@ -44,14 +44,14 @@ class _LocationDetailScreenState extends State<LocationDetailScreen> {
             // Show the name, type and dimension of the location
             Text(
               '${widget.location.name} is a ${widget.location.type} located in ${widget.location.dimension}',
-              style: Theme.of(context).textTheme.headline1,
+              style: Theme.of(context).textTheme.displayLarge,
             ),
             const SizedBox(
               height: 20,
             ),
             Text(
               'Habitants',
-              style: Theme.of(context).textTheme.headline1,
+              style: Theme.of(context).textTheme.displayLarge,
             ),
 
             // Show the list of characters that live in the location
@@ -59,17 +59,15 @@ class _LocationDetailScreenState extends State<LocationDetailScreen> {
               child: FutureBuilder(
                 future: _residents,
                 builder: (context, snapshot) {
-                  // If the list of characters is empty, show a message
-                  if (snapshot.data == null) {
-                    return const Center(
-                      child: Text('No Habitants found'),
-                    );
-                  }
-
                   // If the list of characters is not loaded yet, show a loading indicator
                   if (!snapshot.hasData) {
                     return const Center(
                       child: CircularProgressIndicator(),
+                    );
+                  } else if (snapshot.data!.isEmpty) {
+                    // If the list of characters is empty, show a message
+                    return const Center(
+                      child: Text('No Habitants found'),
                     );
                   }
 

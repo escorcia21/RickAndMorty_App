@@ -148,7 +148,7 @@ class RickAndMortyService {
       final results = jsonDecode(body);
       return results;
     } else {
-      throw Exception("Failed to load data");
+      return [];
     }
   }
 

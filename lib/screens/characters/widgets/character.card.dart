@@ -44,7 +44,7 @@ class CharacterCard extends StatelessWidget {
               // Show the character name and status
               Text(
                 character.name,
-                style: Theme.of(context).textTheme.headline1,
+                style: Theme.of(context).textTheme.displayLarge,
               ),
               Row(
                 children: [
@@ -52,7 +52,7 @@ class CharacterCard extends StatelessWidget {
                   const SizedBox(width: 8.0),
                   Text(
                     '${character.status} - ${character.species}',
-                    style: Theme.of(context).textTheme.subtitle2,
+                    style: Theme.of(context).textTheme.titleSmall,
                   )
                 ],
               ),
@@ -60,19 +60,19 @@ class CharacterCard extends StatelessWidget {
               // Show the character's origin and Last known location
               Text(
                 'Last known location:',
-                style: Theme.of(context).textTheme.headline3,
+                style: Theme.of(context).textTheme.displaySmall,
               ),
               Text(
                 character.location.name,
-                style: Theme.of(context).textTheme.subtitle2,
+                style: Theme.of(context).textTheme.titleSmall,
               ),
               Text(
                 'Origin:',
-                style: Theme.of(context).textTheme.headline3,
+                style: Theme.of(context).textTheme.displaySmall,
               ),
               Text(
                 character.origin.name,
-                style: Theme.of(context).textTheme.subtitle2,
+                style: Theme.of(context).textTheme.titleSmall,
               ),
             ],
           ),

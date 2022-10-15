@@ -63,14 +63,14 @@ class EpisodeCard extends StatelessWidget {
                 children: [
                   // show the episode's name
                   Text(episode.name,
-                      style: Theme.of(context).textTheme.headline4),
+                      style: Theme.of(context).textTheme.headlineMedium),
 
                   // make a dot between the name and the air date
                   const Text(' • '),
 
                   // show the episode's air date
                   Text(episode.airDate,
-                      style: Theme.of(context).textTheme.headline4),
+                      style: Theme.of(context).textTheme.headlineMedium),
                 ],
               ),
             ),

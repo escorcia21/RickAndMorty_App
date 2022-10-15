@@ -50,13 +50,13 @@ class _EpisodeDetailScreenState extends State<EpisodeDetailScreen> {
           ),
           Text(
             widget.episode.airDate,
-            style: Theme.of(context).textTheme.headline1,
+            style: Theme.of(context).textTheme.displayLarge,
           ),
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: Text(
               widget.episode.overview,
-              style: Theme.of(context).textTheme.bodyText2,
+              style: Theme.of(context).textTheme.bodyMedium,
             ),
           ),
           const SizedBox(
@@ -66,7 +66,7 @@ class _EpisodeDetailScreenState extends State<EpisodeDetailScreen> {
           // Show the list of characters that appear in the episode
           Text(
             'Characters',
-            style: Theme.of(context).textTheme.headline1,
+            style: Theme.of(context).textTheme.displayLarge,
           ),
           Expanded(
             child: FutureBuilder(
@@ -76,13 +76,6 @@ class _EpisodeDetailScreenState extends State<EpisodeDetailScreen> {
                 if (!snapshot.hasData) {
                   return const Center(
                     child: CircularProgressIndicator(),
-                  );
-                }
-
-                // If the list of characters is empty, show a message
-                if (snapshot.data!.isEmpty) {
-                  return const Center(
-                    child: Text('No characters found'),
                   );
                 }
 

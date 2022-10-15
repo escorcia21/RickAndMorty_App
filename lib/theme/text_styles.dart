@@ -55,13 +55,13 @@ class AppTextStyle {
       );
 
   static TextTheme get textTheme => TextTheme(
-        headline1: headline1,
-        headline2: headline2,
-        headline3: headline3,
-        headline4: headline4,
-        bodyText1: bodytext1,
-        caption: caption,
-        subtitle1: subtitle1,
-        subtitle2: subtitle2,
+        displayLarge: headline1,
+        displayMedium: headline2,
+        displaySmall: headline3,
+        headlineMedium: headline4,
+        bodyLarge: bodytext1,
+        bodySmall: caption,
+        titleMedium: subtitle1,
+        titleSmall: subtitle2,
       );
 }
