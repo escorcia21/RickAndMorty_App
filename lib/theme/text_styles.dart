@@ -25,6 +25,14 @@ class AppTextStyle {
         fontSize: 14.0,
         fontWeight: FontWeight.w700,
       );
+
+  // headline 4
+  static TextStyle get headline4 => GoogleFonts.dmSans(
+        fontSize: 12.0,
+        fontWeight: FontWeight.bold,
+        color: Colors.white,
+      );
+
   // Bodytext 1
   static TextStyle get bodytext1 => GoogleFonts.roboto(
         fontSize: 16.0,
@@ -50,6 +58,7 @@ class AppTextStyle {
         headline1: headline1,
         headline2: headline2,
         headline3: headline3,
+        headline4: headline4,
         bodyText1: bodytext1,
         caption: caption,
         subtitle1: subtitle1,
