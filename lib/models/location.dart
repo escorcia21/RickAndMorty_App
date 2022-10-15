@@ -8,7 +8,7 @@
 ///
 /// [dimension] The dimension in which the location is located.
 ///
-/// [residents] List of character who have been last seen in the location.
+/// [residents] List of characters' ids who have been last seen in the location.
 ///
 /// [url] Link to the location's own endpoint.
 class Location {
@@ -16,7 +16,7 @@ class Location {
   String name;
   String type;
   String dimension;
-  List<String> residents;
+  List<int> residents;
   String url;
 
   Location({
@@ -34,7 +34,9 @@ class Location {
       name: json["name"],
       type: json["type"],
       dimension: json["dimension"],
-      residents: List<String>.from(json["residents"].map((x) => x)),
+      residents: json["residents"]
+          .map<int>((character) => int.parse(character.split("/").last))
+          .toList(),
       url: json["url"],
     );
   }
