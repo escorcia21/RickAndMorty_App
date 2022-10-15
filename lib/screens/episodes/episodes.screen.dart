@@ -54,9 +54,10 @@ class _EpisodesScreenState extends State<EpisodesScreen>
   }
 
   // Fetch the episodes of a season
-  void _getSeason(String name) async {
+  void _getSeason(String name, int season) async {
     try {
-      final page = await RickAndMortyService.getEpisodes(episode: name);
+      final page = await RickAndMortyService.getEpisodes(
+          episode: name, seasonNumber: season);
 
       // Add the new episodes to the list
       setState(() {
@@ -115,22 +116,22 @@ class _EpisodesScreenState extends State<EpisodesScreen>
       onChanged: (value) {
         switch (value) {
           case 'Season 1':
-            _getSeason('S01');
+            _getSeason('S01', 1);
             break;
           case 'Season 2':
-            _getSeason('S02');
+            _getSeason('S02', 2);
             break;
           case 'Season 3':
-            _getSeason('S03');
+            _getSeason('S03', 3);
             break;
           case 'Season 4':
-            _getSeason('S04');
+            _getSeason('S04', 4);
             break;
           case 'Season 5':
-            _getSeason('S05');
+            _getSeason('S05', 5);
             break;
           default:
-            _getSeason('S01');
+            _getSeason('S01', 1);
         }
       },
       decoration: const InputDecoration(
@@ -149,7 +150,7 @@ class _EpisodesScreenState extends State<EpisodesScreen>
         .toList();
   }
 
-  //
+  // Keep the state of the widget alive
   @override
   bool get wantKeepAlive => true;
 }
