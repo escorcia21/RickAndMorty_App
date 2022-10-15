@@ -11,7 +11,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: "This is't a rick and morty app",
+      title: "It's an App Morty!",
       theme: MyTheme.darkTheme,
       home: const ContentScreen(),
     );

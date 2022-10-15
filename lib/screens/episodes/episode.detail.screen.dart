@@ -46,7 +46,11 @@ class _EpisodeDetailScreenState extends State<EpisodeDetailScreen> {
           // Show the name, type and dimension of the location
           Image.network(
             widget.episode.stillPath,
+            height: 200,
             fit: BoxFit.fill,
+          ),
+          const SizedBox(
+            height: 10,
           ),
           Text(
             widget.episode.airDate,
@@ -60,7 +64,7 @@ class _EpisodeDetailScreenState extends State<EpisodeDetailScreen> {
             ),
           ),
           const SizedBox(
-            height: 20,
+            height: 10,
           ),
 
           // Show the list of characters that appear in the episode
