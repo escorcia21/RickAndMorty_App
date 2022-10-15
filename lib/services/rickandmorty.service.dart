@@ -1,15 +1,22 @@
+import 'package:rickandmorty/env/env.dart';
 import 'package:rickandmorty/models/character.dart';
 import 'package:rickandmorty/models/episode.dart';
 import 'package:rickandmorty/models/location.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
-/// Service to fetch data from the Rick and Morty API
+import 'package:rickandmorty/utils/format.string.dart';
+
+/// Service to fetch data from the Rick and Morty API and TMDB
 ///
 /// https://rickandmortyapi.com/
+/// https://developers.themoviedb.org/3/getting-started/introduction
 class RickAndMortyService {
   /// Base URL for the Rick and Morty API
   static const String _baseUrl = 'rickandmortyapi.com';
+
+  /// Base URL for TMDb API
+  static const String _tmdbBaseUrl = 'api.themoviedb.org';
 
   /// Get characters
   ///
@@ -33,6 +40,30 @@ class RickAndMortyService {
     return characters;
   }
 
+  /// Get Characters by id
+  ///
+  /// [ids] is a list of ids
+  ///
+  /// [getCharactersByIds] will return a list of [Character] objects
+  ///
+  /// Example:
+  ///
+  /// ```dart
+  /// // [characters] will be a list of [Character] objects with the ids 1, 2 and 3
+  /// List<int> ids = [1, 2, 3];
+  /// List<Character> characters = await RickAndMortyService.getCharactersByIds(ids);
+  /// ```
+  ///
+  /// https://rickandmortyapi.com/documentation/#get-multiple-characters
+  static Future<List<Character>> getCharactersByIds(List<int> ids) async {
+    final results = await fetcher('/character/$ids');
+
+    List<Character> characters = results.map<Character>((character) {
+      return Character.fromJson(character);
+    }).toList();
+    return characters;
+  }
+
   /// **Get episodes**
   ///
   /// [name] is optional, it will filter the episodes by name
@@ -44,13 +75,21 @@ class RickAndMortyService {
   ///
   /// https://rickandmortyapi.com/documentation/#filter-episodes
   static Future<List<Episode>> getEpisodes(
-      {String name = '', int page = 1, String episode = 'S01'}) async {
-    final response = await fetcher('/episode',
-        name: name, page: page.toString(), episode: episode);
+      {String name = '', int seasonNumber = 1, String episode = 'S01'}) async {
+    final response = await fetcher('/episode', name: name, episode: episode);
+    final details = await fetcherTmdb(seasonId: seasonNumber.toString());
 
+    var detailsResults = details['episodes'];
     var results = response['results'];
-    List<Episode> episodes =
-        results.map<Episode>((episode) => Episode.fromJson(episode)).toList();
+
+    List<Episode> episodes = results.map<Episode>((episode) {
+      var episodeDetails = detailsResults
+          .where((element) =>
+              formatString(element['name']) == formatString(episode['name']))
+          .toList();
+
+      return Episode.fromJson(episode, episodeDetails[0]);
+    }).toList();
 
     return episodes;
   }
@@ -103,6 +142,33 @@ class RickAndMortyService {
       {String name = '', String page = '1', String episode = ''}) async {
     final url = Uri.https(_baseUrl, '/api/$endpoint',
         {'page': page, 'name': name, 'episode': episode});
+    final res = await http.get(url);
+    if (res.statusCode == 200) {
+      String body = utf8.decode(res.bodyBytes);
+      final results = jsonDecode(body);
+      return results;
+    } else {
+      throw Exception("Failed to load data");
+    }
+  }
+
+  /// **TMDb API fetcher**
+  ///
+  /// Fetch the episodes details from TMDb API
+  ///
+  /// [seasonId] is the season id to fetch data from
+  ///
+  /// Exmaple:
+  ///
+  /// ```dart
+  /// // [response] will be a Map with the episodes details of the season 1
+  /// final response = await fetcherTmdb(seasonId: '1');
+  /// ```
+  ///
+  /// https://developers.themoviedb.org/3/tv-seasons/get-tv-season-details
+  static Future fetcherTmdb({String seasonId = '1'}) async {
+    final url = Uri.https(_tmdbBaseUrl, '/3/tv/60625/season/$seasonId',
+        {'api_key': Env.tmdbApiKey});
     final res = await http.get(url);
     if (res.statusCode == 200) {
       String body = utf8.decode(res.bodyBytes);
