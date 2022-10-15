@@ -10,7 +10,6 @@ import 'package:rickandmorty/screens/episodes/episode.detail.screen.dart';
 ///
 /// It displays a [Text] with the episode air date
 ///
-/// It displays a [Text] with the episode code
 class EpisodeCard extends StatelessWidget {
   const EpisodeCard({super.key, required this.episode});
   final Episode episode;
@@ -26,26 +25,57 @@ class EpisodeCard extends StatelessWidget {
 
       // The card itself
       child: Card(
-        child: Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Column(
-            children: [
-              // show the episode's name
-              Text('Name', style: Theme.of(context).textTheme.headline3),
-              Text(episode.name, style: Theme.of(context).textTheme.subtitle1),
+        // Card color
+        color: Colors.black,
 
-              // show the episode's air date
-              Text('Air Date', style: Theme.of(context).textTheme.headline3),
-              Text(episode.airDate,
-                  style: Theme.of(context).textTheme.subtitle1),
-
-              // show the episode's code
-              Text('Code', style: Theme.of(context).textTheme.headline3),
-              Text(episode.episode,
-                  style: Theme.of(context).textTheme.subtitle1),
-            ],
+        // Show the episode banner at the bottom with the stack widget
+        child: Stack(children: [
+          // Make the image fade in to the bottom
+          ShaderMask(
+            shaderCallback: (rect) {
+              return const LinearGradient(
+                begin: Alignment.topCenter,
+                end: Alignment.bottomCenter,
+                colors: [
+                  Colors.black,
+                  Colors.black,
+                  Colors.black,
+                  Colors.transparent,
+                ],
+              ).createShader(Rect.fromLTRB(0, 0, rect.width, rect.height));
+            },
+            blendMode: BlendMode.dstIn,
+            child: Image.network(
+              episode.stillPath,
+              fit: BoxFit.fill,
+            ),
           ),
-        ),
+
+          // Make the Row expand to the bottom
+          Positioned.fill(
+            child: Padding(
+              padding: const EdgeInsets.symmetric(
+                vertical: 16.0,
+              ),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.end,
+                children: [
+                  // show the episode's name
+                  Text(episode.name,
+                      style: Theme.of(context).textTheme.headline4),
+
+                  // make a dot between the name and the air date
+                  const Text(' • '),
+
+                  // show the episode's air date
+                  Text(episode.airDate,
+                      style: Theme.of(context).textTheme.headline4),
+                ],
+              ),
+            ),
+          ),
+        ]),
       ),
     );
   }
