@@ -45,8 +45,10 @@ class EpisodeCard extends StatelessWidget {
               ).createShader(Rect.fromLTRB(0, 0, rect.width, rect.height));
             },
             blendMode: BlendMode.dstIn,
-            child: Image.network(
-              episode.stillPath,
+            child: FadeInImage.assetNetwork(
+              placeholder: 'assets/preload.jpg',
+              image: episode.stillPath,
+              width: double.infinity,
               fit: BoxFit.fill,
             ),
           ),

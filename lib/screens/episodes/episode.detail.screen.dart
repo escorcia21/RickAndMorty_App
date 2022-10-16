@@ -46,8 +46,9 @@ class _EpisodeDetailScreenState extends State<EpisodeDetailScreen> {
           // Show the name, type and dimension of the location
           Image.network(
             widget.episode.stillPath,
-            height: 200,
-            fit: BoxFit.fill,
+            width: double.infinity,
+            height: 300,
+            fit: BoxFit.cover,
           ),
           const SizedBox(
             height: 10,
@@ -69,7 +70,7 @@ class _EpisodeDetailScreenState extends State<EpisodeDetailScreen> {
 
           // Show the list of characters that appear in the episode
           Text(
-            'Characters',
+            'Characters: ${widget.episode.characters.length}',
             style: Theme.of(context).textTheme.displayLarge,
           ),
           Expanded(
@@ -85,7 +86,7 @@ class _EpisodeDetailScreenState extends State<EpisodeDetailScreen> {
 
                 // If the list of characters is loaded, show the list of characters
                 return Padding(
-                  padding: const EdgeInsets.all(8.0),
+                  padding: const EdgeInsets.symmetric(vertical: 8.0),
                   child: ListView.builder(
                     itemCount: widget.episode.characters.length,
                     itemBuilder: (context, index) {

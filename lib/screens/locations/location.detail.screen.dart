@@ -50,7 +50,7 @@ class _LocationDetailScreenState extends State<LocationDetailScreen> {
               height: 20,
             ),
             Text(
-              'Habitants',
+              'Habitants: ${widget.location.residents.length}',
               style: Theme.of(context).textTheme.displayLarge,
             ),
 
@@ -72,13 +72,16 @@ class _LocationDetailScreenState extends State<LocationDetailScreen> {
                   }
 
                   // If the list of characters is loaded, show the list of characters
-                  return ListView.builder(
-                    itemCount: widget.location.residents.length,
-                    itemBuilder: (context, index) {
-                      // Get the character from the snapshot and creating a CharacterCard
-                      Character character = snapshot.data![index];
-                      return CharacterCard(character: character);
-                    },
+                  return Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 8.0),
+                    child: ListView.builder(
+                      itemCount: widget.location.residents.length,
+                      itemBuilder: (context, index) {
+                        // Get the character from the snapshot and creating a CharacterCard
+                        Character character = snapshot.data![index];
+                        return CharacterCard(character: character);
+                      },
+                    ),
                   );
                 },
               ),
