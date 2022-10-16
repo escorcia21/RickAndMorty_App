@@ -56,14 +56,10 @@ class _EpisodesScreenState extends State<EpisodesScreen>
   // Fetch the episodes of a season
   void _getSeason(String name, int season) async {
     try {
-      final page = await RickAndMortyService.getEpisodes(
-          episode: name, seasonNumber: season);
-
       // Add the new episodes to the list
       setState(() {
-        _episodes = _episodes.then((episodes) {
-          return page;
-        });
+        _episodes = RickAndMortyService.getEpisodes(
+            episode: name, seasonNumber: season);
       });
     } catch (error) {
       // Show a snackbar to notify the user that there was an error
@@ -85,9 +81,11 @@ class _EpisodesScreenState extends State<EpisodesScreen>
           // FutureBUilder to build the widget based on the state
           child: FutureBuilder(
             future: _episodes,
+            initialData: const [],
             builder: (BuildContext context, AsyncSnapshot snapshot) {
               // If the data is not fetched yet, show a loading indicator
-              if (!snapshot.hasData) {
+              if (!snapshot.hasData ||
+                  snapshot.connectionState == ConnectionState.waiting) {
                 return const Center(child: CircularProgressIndicator());
               }
 

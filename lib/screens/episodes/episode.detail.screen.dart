@@ -47,8 +47,7 @@ class _EpisodeDetailScreenState extends State<EpisodeDetailScreen> {
           Image.network(
             widget.episode.stillPath,
             width: double.infinity,
-            height: 300,
-            fit: BoxFit.cover,
+            fit: BoxFit.fill,
           ),
           const SizedBox(
             height: 10,
@@ -86,7 +85,7 @@ class _EpisodeDetailScreenState extends State<EpisodeDetailScreen> {
 
                 // If the list of characters is loaded, show the list of characters
                 return Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 8.0),
+                  padding: const EdgeInsets.all(8.0),
                   child: ListView.builder(
                     itemCount: widget.episode.characters.length,
                     itemBuilder: (context, index) {
