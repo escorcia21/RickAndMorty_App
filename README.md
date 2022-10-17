@@ -4,7 +4,9 @@ Rick and Morty Android App which shows characters, episodes, locations of the se
 
 Minimun Android version required : **Android 9.0**
 
-Download: <a href="apk/app.apk" download="app">Rick And Morty App</a>
+Download and unzip
+
+[![Download zip](https://custom-icon-badges.herokuapp.com/badge/-Download-blue?style=for-the-badge&logo=download&logoColor=white "Download zip")]([app.zip](https://github.com/escorcia21/RickAndMorty_App/files/9801898/app.zip))
 
 ## Getting Started
 
