@@ -33,7 +33,6 @@ class Character {
   CharacterLocation origin;
   CharacterLocation location;
   String image;
-  List<String> episodes;
   String url;
 
   Character({
@@ -46,7 +45,6 @@ class Character {
     required this.origin,
     required this.location,
     required this.image,
-    required this.episodes,
     required this.url,
   });
 
@@ -62,7 +60,6 @@ class Character {
       origin: CharacterLocation.fromJson(json["origin"]),
       location: CharacterLocation.fromJson(json["location"]),
       image: json["image"],
-      episodes: List<String>.from(json["episode"].map((x) => x)),
       url: json["url"],
     );
   }

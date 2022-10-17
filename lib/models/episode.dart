@@ -33,7 +33,7 @@ class Episode {
   });
 
   /// Factory constructor for Episode (parse JSON to Episode).
-  factory Episode.fromJson(Map<String, dynamic> json, json2) {
+  factory Episode.fromJson(Map<String, dynamic> json, tmdbJson) {
     return Episode(
       id: json["id"],
       name: json["name"],
@@ -43,8 +43,8 @@ class Episode {
       characters: json["characters"]
           .map<int>((character) => int.parse(character.split("/").last))
           .toList(),
-      overview: json2["overview"],
-      stillPath: 'https://image.tmdb.org/t/p/w500${json2["still_path"]}',
+      overview: tmdbJson["overview"],
+      stillPath: 'https://image.tmdb.org/t/p/w500${tmdbJson["still_path"]}',
       url: json["url"],
     );
   }

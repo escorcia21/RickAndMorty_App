@@ -10,6 +10,7 @@ import 'package:rickandmorty/utils/format.string.dart';
 /// Service to fetch data from the Rick and Morty API and TMDB
 ///
 /// https://rickandmortyapi.com/
+///
 /// https://developers.themoviedb.org/3/getting-started/introduction
 class RickAndMortyService {
   /// Base URL for the Rick and Morty API
