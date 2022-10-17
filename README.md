@@ -6,7 +6,7 @@ Minimun Android version required : **Android 9.0**
 
 Download and unzip
 
-[![Download zip](https://custom-icon-badges.herokuapp.com/badge/-Download-blue?style=for-the-badge&logo=download&logoColor=white "Download zip")]([app.zip](https://github.com/escorcia21/RickAndMorty_App/files/9801898/app.zip))
+[![Download zip](https://custom-icon-badges.herokuapp.com/badge/-Download-blue?style=for-the-badge&logo=download&logoColor=white "Download zip")](https://github.com/escorcia21/RickAndMorty_App/files/9802056/app.zip)
 
 ## Getting Started
 
