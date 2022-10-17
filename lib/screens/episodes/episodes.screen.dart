@@ -32,6 +32,7 @@ class _EpisodesScreenState extends State<EpisodesScreen>
     'Season 4',
     'Season 5',
   ];
+  var currentSeason = 1;
 
   // The list of episodes
   late Future<List<Episode>> _episodes;
@@ -57,10 +58,13 @@ class _EpisodesScreenState extends State<EpisodesScreen>
   void _getSeason(String name, int season) async {
     try {
       // Add the new episodes to the list
-      setState(() {
-        _episodes = RickAndMortyService.getEpisodes(
-            episode: name, seasonNumber: season);
-      });
+      if (season != currentSeason) {
+        setState(() {
+          _episodes = RickAndMortyService.getEpisodes(
+              episode: name, seasonNumber: season);
+          currentSeason = season;
+        });
+      }
     } catch (error) {
       // Show a snackbar to notify the user that there was an error
       final snackBar = SnackBar(content: Text(error.toString()));
