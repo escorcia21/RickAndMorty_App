@@ -35,8 +35,15 @@ Create a .env file in the root of the project and add the TMDb API key (previous
 ```bash
 TMDB_KEY=YOUR_API_KEY
 ```
+### 4. Genrate the environment variables
 
-### 4. Run the project
+Run the generator that will create the environment variables.
+
+```bash
+flutter pub run build_runner build
+```
+
+### 5. Run the project
 
 ```bash
 flutter run --release
