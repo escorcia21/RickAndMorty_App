@@ -50,7 +50,8 @@ class _EpisodeDetailScreenState extends State<EpisodeDetailScreen> {
                   500,
                   MediaQuery.of(context).orientation == Orientation.portrait
                       ? MediaQuery.of(context).size.height -
-                          AppBar().preferredSize.height
+                          (AppBar().preferredSize.height +
+                              MediaQuery.of(context).padding.top)
                       : MediaQuery.of(context).size.width)),
           child: Column(
             children: [
